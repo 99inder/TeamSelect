@@ -1,16 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    value: 1
+    value: 1,
 };
 
 export const currentPageSlice = createSlice({
-    name: 'currentPageSlice',
+    name: 'pagesSlice',
     initialState,
     reducers: {
         setCurrentPage: (state, action) => {
             state.value = action.payload
-        },
+        }
     },
 })
 

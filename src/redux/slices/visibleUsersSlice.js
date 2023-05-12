@@ -10,7 +10,7 @@ export const visibleUsersSlice = createSlice({
     reducers: {
         setVisibleUsers: (state, action) => {
             state.value = action.payload
-            console.log(state.value)
+            console.log(action.payload)
         },
     },
 })

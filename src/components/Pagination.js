@@ -1,21 +1,25 @@
 import React, { useEffect } from 'react'
+import { mockData as data } from '../data/heliverse_mock_data'
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentPage } from '../redux/slices/currentPageSlice';
 import { setVisibleUsers } from '../redux/slices/visibleUsersSlice';
+import { usersAccordingToPage } from '../utilityFunctions/usersAccordingToPage';
 
-const Pagination = ({ usersPerPage, data}) => {
+const Pagination = ({ usersPerPage }) => {
+
   const dispatch = useDispatch();
 
+  //getting state from the redux store
   const currentPage = useSelector(state => state.currentPage.value);
   const totalPages = Math.ceil(data.length / usersPerPage);
 
   useEffect(() => {
-    const startIndex = (currentPage - 1) * usersPerPage;
-    const endIndex = startIndex + usersPerPage;
-    dispatch(setVisibleUsers(data.slice(startIndex, endIndex)));
+    const requiredData = usersAccordingToPage(data, currentPage, usersPerPage);
+    dispatch(setVisibleUsers(requiredData));
+
     // eslint-disable-next-line
   }, [currentPage, data, usersPerPage]);
-  
+
 
   return (
     <div className='flex justify-between'>
