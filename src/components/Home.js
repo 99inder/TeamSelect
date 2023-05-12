@@ -5,11 +5,10 @@ import Filter from "./Filter"
 
 const Home = () => {
 
-    const visibleUsers = useSelector(state => state.visibleUsers.value)    
+    const visibleUsers = useSelector(state => state.visibleUsers.value)
 
     return (
-        <div className='w-[70%] mx-auto'>
-            <Pagination />
+        <div className='w-[70%] mx-auto mt-16 mb-12'>
             <Filter />
             <div className=' flex justify-center flex-wrap gap-4'>
 
@@ -25,6 +24,7 @@ const Home = () => {
                 }
 
             </div>
+            <Pagination />
         </div>
     )
 }

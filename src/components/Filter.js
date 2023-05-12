@@ -4,7 +4,7 @@ import { getDomains, getGenders } from '../utilityFunctions/setFinder'
 import { setVisibleUsers } from "../redux/slices/visibleUsersSlice"
 import { useDispatch, useSelector } from 'react-redux'
 import { usersAccordingToPage } from '../utilityFunctions/usersAccordingToPage'
-import { setTotalPages } from '../redux/slices/pageInfoSlice'
+import { setCurrentPage, setTotalPages } from '../redux/slices/pageInfoSlice'
 
 const Filter = () => {
 
@@ -77,6 +77,7 @@ const Filter = () => {
         const requiredData = usersAccordingToPage(filteredUsers, currentPage, usersPerPage);
         dispatch(setVisibleUsers(requiredData));
         dispatch(setTotalPages(Math.ceil(filteredUsers.length / usersPerPage)))
+        dispatch(setCurrentPage(1));
 
         // eslint-disable-next-line
     }, [filters]);
@@ -97,11 +98,6 @@ const Filter = () => {
                         )
                     })
                 }
-                {/* <label htmlFor="male">Male</label>
-                <input type="checkbox" name="gender" value="male" id='male' onChange={filterHandler} />
-
-                <label htmlFor="female">Female</label>
-                <input type="checkbox" name="gender" value="female" id='female' onChange={filterHandler} /> */}
             </div>
 
             <hr />
