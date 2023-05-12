@@ -1,20 +1,21 @@
 import React, { useEffect } from 'react'
 import { mockData as data } from '../data/heliverse_mock_data'
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentPage } from '../redux/slices/currentPageSlice';
+import { setCurrentPage } from '../redux/slices/pageInfoSlice';
 import { setVisibleUsers } from '../redux/slices/visibleUsersSlice';
 import { usersAccordingToPage } from '../utilityFunctions/usersAccordingToPage';
 
-const Pagination = ({ usersPerPage }) => {
+const Pagination = () => {
 
   const dispatch = useDispatch();
 
   //getting state from the redux store
-  const currentPage = useSelector(state => state.currentPage.value);
-  const totalPages = Math.ceil(data.length / usersPerPage);
+  const { currentPage, totalPages, usersPerPage } = useSelector(state => state.pageInfo);
 
+  
   useEffect(() => {
     const requiredData = usersAccordingToPage(data, currentPage, usersPerPage);
+
     dispatch(setVisibleUsers(requiredData));
 
     // eslint-disable-next-line

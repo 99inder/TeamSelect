@@ -2,23 +2,15 @@ import Pagination from "./Pagination"
 import Card from './Card'
 import { useSelector } from 'react-redux'
 import Filter from "./Filter"
-import { useEffect } from "react"
 
 const Home = () => {
 
-    const usersPerPage = 10;
-
-    const visibleUsers = useSelector(state => state.visibleUsers.value)
-
-    useEffect(() => {
-      
-    }, [visibleUsers])
-    
+    const visibleUsers = useSelector(state => state.visibleUsers.value)    
 
     return (
         <div className='w-[70%] mx-auto'>
-            <Pagination usersPerPage={usersPerPage}/>
-            <Filter usersPerPage={usersPerPage}/>
+            <Pagination />
+            <Filter />
             <div className=' flex justify-center flex-wrap gap-4'>
 
                 {
