@@ -2,7 +2,6 @@ import Pagination from "./Pagination"
 import Card from './Card'
 import { useSelector } from 'react-redux'
 import Filter from "./Filter"
-import Spinner from "./Spinner"
 
 const Home = () => {
 
@@ -16,9 +15,8 @@ const Home = () => {
                 {
                     visibleUsers.length === 0
                         ?
-                        <Spinner />
+                        <p className='flex items-center justify-center h-screen text-3xl text-bolder text-slate-600'>No User Found</p>
                         :
-
                         visibleUsers.map((item) => (
                             <Card key={item.id} user={item} />
                         ))

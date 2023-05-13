@@ -116,7 +116,7 @@ const Filter = () => {
                 }
             </div>
 
-            <div className={`fixed top-24 left-10 w-fit z-10 bg-white rounded-xl p-5 border-2 shadow-2xl border-teal-800 transition-all duration-500 ${isOpen ? ' opacity-100' : 'opacity-0'}`}>
+            <div className={`fixed top-24 left-10 w-fit z-10 bg-white rounded-xl p-5 border-2 shadow-2xl border-teal-800 transition-all duration-500 ${isOpen ? ' opacity-100' : 'opacity-0 hidden'}`}>
                 {/* Filter by Name */}
                 <div className=' w-full'>
                     <input className='w-full h-10 px-4 border border-slate-400 rounded-xl' type="text" name="name" value={filters.name} placeholder='Search Name' onChange={filterHandler} />
