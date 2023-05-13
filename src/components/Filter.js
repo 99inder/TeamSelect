@@ -7,6 +7,7 @@ import { usersAccordingToPage } from '../utilityFunctions/usersAccordingToPage'
 import { setCurrentPage, setTotalPages } from '../redux/slices/pageInfoSlice'
 import { BiMenuAltLeft } from "react-icons/bi"
 import { AiOutlineClose } from "react-icons/ai"
+import { setFilteredData } from '../redux/slices/filteredDataSlice'
 
 const Filter = () => {
 
@@ -39,7 +40,6 @@ const Filter = () => {
                         name: value
                     }
                 })
-                console.log(filters.name);
             }
 
 
@@ -93,7 +93,9 @@ const Filter = () => {
             return nameIncludes && genderMatches && availabilityMatches && domainMatches;
         });
 
+        dispatch(setFilteredData(filteredUsers));
         const requiredData = usersAccordingToPage(filteredUsers, currentPage, usersPerPage);
+
         dispatch(setVisibleUsers(requiredData));
         dispatch(setTotalPages(Math.ceil(filteredUsers.length / usersPerPage)))
         dispatch(setCurrentPage(1));

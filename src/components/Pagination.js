@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { mockData as data } from '../data/heliverse_mock_data'
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentPage } from '../redux/slices/pageInfoSlice';
 import { setVisibleUsers } from '../redux/slices/visibleUsersSlice';
@@ -11,15 +10,16 @@ const Pagination = () => {
 
   //getting state from the redux store
   const { currentPage, totalPages, usersPerPage } = useSelector(state => state.pageInfo);
+  const { filteredData } = useSelector(state => state.filteredData);
 
 
   useEffect(() => {
-    const requiredData = usersAccordingToPage(data, currentPage, usersPerPage);
+    const requiredData = usersAccordingToPage(filteredData, currentPage, usersPerPage);
 
     dispatch(setVisibleUsers(requiredData));
 
     // eslint-disable-next-line
-  }, [currentPage, data, usersPerPage]);
+  }, [currentPage, filteredData, usersPerPage]);
 
 
   return (
