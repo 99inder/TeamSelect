@@ -17,6 +17,7 @@ const Pagination = () => {
     const requiredData = usersAccordingToPage(filteredData, currentPage, usersPerPage);
 
     dispatch(setVisibleUsers(requiredData));
+    window.scrollTo(0, 0)
 
     // eslint-disable-next-line
   }, [currentPage, filteredData, usersPerPage]);

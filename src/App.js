@@ -8,7 +8,7 @@ import Team from './components/Team'
 
 const App = () => {
   return (
-    <div className='bg-slate-100 w-full h-auto min-h-screen'>
+    <div className='bg-slate-100 w-full h-fit min-h-screen'>
       <ToastContainer />
 
       <Navbar />

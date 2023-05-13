@@ -48,7 +48,7 @@ const Card = ({ user }) => {
 
 
     return (
-        <div className={`max-w-sm bg-white shadow-lg rounded-lg overflow-hidden my-4 w-[23%] min-w-[250px] relative ${!user.available && "opacity-75"} group`}>
+        <div className={`max-w-sm bg-white shadow-lg rounded-lg overflow-hidden my-4 w-[23%] min-w-[250px] relative ${!user.available ? "opacity-70" : " shadow-green-200"} hover:scale-105 transition-all duration-300 group`}>
             <div className='h-[100px] flex justify-center items-center w-full'>
                 <img className="w-[20%] p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src={user.avatar} alt="Bordered avatar" />
             </div>
