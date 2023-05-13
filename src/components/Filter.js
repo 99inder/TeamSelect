@@ -14,6 +14,7 @@ const Filter = () => {
 
     const [filters, setFilters] = useState(
         {
+            "name": "",
             "gender": [],
             "availability": [],
             "domain": [],
@@ -26,6 +27,17 @@ const Filter = () => {
         //filters state managing logic here
         // eslint-disable-next-line
         {
+            //name filter logic
+            if (name === "name") {
+                setFilters((prev) => {
+                    return {
+                        ...prev,
+                        name: value
+                    }
+                })
+                console.log(filters.name);
+            }
+
 
             //gender filter logic
             if (name === "gender") {
@@ -67,11 +79,14 @@ const Filter = () => {
 
     useEffect(() => {
         const filteredUsers = data.filter(user => {
+            const fullName = user.first_name.toLowerCase() + " " + user.last_name.toLowerCase();
+            const nameIncludes = filters.name.length === 0 || fullName.includes(filters.name.toLowerCase());
+
             const genderMatches = filters.gender.length === 0 || filters.gender.includes(user.gender);
             const availabilityMatches = filters.availability.length === 0 || filters.availability.includes(user.available === true ? "available" : "unavailable");
             const domainMatches = filters.domain.length === 0 || filters.domain.includes(user.domain);
 
-            return genderMatches && availabilityMatches && domainMatches;
+            return nameIncludes && genderMatches && availabilityMatches && domainMatches;
         });
 
         const requiredData = usersAccordingToPage(filteredUsers, currentPage, usersPerPage);
@@ -86,6 +101,9 @@ const Filter = () => {
 
     return (
         <div>
+            <div>
+                <input type="text" name="name" value={filters.name} placeholder='Search Name' onChange={filterHandler} />
+            </div>
             {/* Genders Filter List */}
             <div>
                 <p>Gender:</p>

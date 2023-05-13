@@ -1,2 +1,0 @@
-1) shows no data when are on a page that is higher than the page count for the filtered data
-Fix: reset the page to '1' whenever a filter is applied
