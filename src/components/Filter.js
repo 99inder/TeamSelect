@@ -5,8 +5,12 @@ import { setVisibleUsers } from "../redux/slices/visibleUsersSlice"
 import { useDispatch, useSelector } from 'react-redux'
 import { usersAccordingToPage } from '../utilityFunctions/usersAccordingToPage'
 import { setCurrentPage, setTotalPages } from '../redux/slices/pageInfoSlice'
+import { BiMenuAltLeft } from "react-icons/bi"
+import { AiOutlineClose } from "react-icons/ai"
 
 const Filter = () => {
+
+    const [isOpen, setIsOpen] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -100,52 +104,89 @@ const Filter = () => {
 
 
     return (
-        <div>
-            <div>
-                <input type="text" name="name" value={filters.name} placeholder='Search Name' onChange={filterHandler} />
-            </div>
-            {/* Genders Filter List */}
-            <div>
-                <p>Gender:</p>
+        <>
+            <div className="menu fixed left-4 z-30 text-3xl bg-black text-white rounded-full p-3 cursor-pointer max-sm:left-1" onClick={() => setIsOpen(!isOpen)}>
                 {
-                    getGenders(data).map((gender, index) => {
-                        return (
-                            <label key={index} htmlFor={gender}>{gender}
-                                <input type="checkbox" name="gender" value={gender} id={gender} onChange={filterHandler} />
-                            </label>
-                        )
-                    })
+                    !isOpen ?
+                        <BiMenuAltLeft /> :
+                        <AiOutlineClose />
                 }
             </div>
 
-            <hr />
+            <div className={`fixed top-24 left-10 w-fit z-10 bg-white rounded-xl p-5 ${isOpen ? '' : 'hidden'}`}>
+                {/* Filter by Name */}
+                <div className=' w-full'>
+                    <input className='w-full h-10 px-4 border border-slate-400 rounded-xl' type="text" name="name" value={filters.name} placeholder='Search Name' onChange={filterHandler} />
+                </div>
 
-            {/* Availability Filter List */}
-            <div>
-                <p>Availability:</p>
-                <label htmlFor="available">Available</label>
-                <input type="checkbox" name="availability" value="available" id='available' onChange={filterHandler} />
+                {/* Genders Filter List */}
+                <div className='mt-2'>
+                    <p className='text-lg font-semibold mb-1'>Gender:</p>
+                    <div className='flex flex-wrap gap-2'>
+                        {
+                            getGenders(data).map((gender, index) => {
+                                return (
+                                    <div key={index}>
 
-                <label htmlFor="unavailable">Un-available</label>
-                <input type="checkbox" name="availability" value="unavailable" id="unavailable" onChange={filterHandler} />
+                                        <input type="checkbox" name="gender" value={gender} id={gender} className="peer hidden" onChange={filterHandler} />
+                                        <label htmlFor={gender} className="select-none cursor-pointer rounded-lg border-2 border-teal-800
+   py-1 px-1 font-bold text-zinc-800 transition-colors duration-200 ease-in-out peer-checked:bg-teal-800 peer-checked:text-slate-50 peer-checked:border-black ">{gender}
+                                        </label>
+                                    </div>
+
+                                )
+                            })
+                        }
+                    </div>
+                </div>
+
+                <hr />
+
+                {/* Availability Filter List */}
+                <div className='mt-2'>
+                    <p className='text-lg font-semibold mb-1'>Availability:</p>
+                    <div className="flex flex-wrap gap-2">
+
+                        <div>
+                            <input type="checkbox" name="availability" value="available" id='available' className="peer hidden" onChange={filterHandler} />
+                            <label htmlFor="available" className="select-none cursor-pointer rounded-lg border-2 border-teal-800
+   py-1 px-1 font-bold text-zinc-800 transition-colors duration-200 ease-in-out peer-checked:bg-teal-800 peer-checked:text-slate-50 peer-checked:border-black ">Available</label>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" name="availability" value="unavailable" id='unavailable' className="peer hidden" onChange={filterHandler} />
+                            <label htmlFor="unavailable" className="select-none cursor-pointer rounded-lg border-2 border-teal-800
+   py-1 px-1 font-bold text-zinc-800 transition-colors duration-200 ease-in-out peer-checked:bg-teal-800 peer-checked:text-slate-50 peer-checked:border-black ">Un-available</label>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+
+                {/* Domains Filter List */}
+                <div className='mt-2'>
+                    <p className='text-lg font-semibold mb-1'>Domain:</p>
+                    <div className='flex flex-wrap gap-2'>
+                        {
+                            getDomains(data).map((domainName, index) => {
+                                return (
+                                    <div key={index}>
+
+                                        <input type="checkbox" name="domain" value={domainName} id={domainName} className="peer hidden" onChange={filterHandler} />
+                                        <label htmlFor={domainName} className="select-none cursor-pointer rounded-lg border-2 border-teal-800
+   py-1 px-1 font-bold text-zinc-800 transition-colors duration-200 ease-in-out peer-checked:bg-teal-800 peer-checked:text-slate-50 peer-checked:border-black ">{domainName}
+                                        </label>
+                                    </div>
+
+                                )
+                            })
+                        }
+                    </div>
+
+                </div>
+
             </div>
-
-            <hr />
-
-            {/* Domains Filter List */}
-            <div>
-                <p>Domain:</p>
-                {
-                    getDomains(data).map((domainName, index) => {
-                        return (
-                            <label key={index} htmlFor={domainName}>{domainName}
-                                <input type="checkbox" name="domain" value={domainName} id={domainName} onChange={filterHandler} />
-                            </label>
-                        )
-                    })
-                }
-            </div>
-        </div>
+        </>
     )
 }
 
